@@ -228,10 +228,7 @@ class AssetManager {
 		$needle           = '/' . $content_basename . '/';
 		$at               = strpos( $plugin_dir, $needle );
 
-		// A plugin symlinked in from outside wp-content has no content directory in its real
-		// path. Without this guard strpos() returns false, false + strlen( $needle ) is the
-		// length itself, and substr() chops that many characters off the front of an absolute
-		// path, producing a URL that points nowhere.
+		// A plugin symlinked in from outside wp-content has no content dir in its real path.
 		if ( false === $at ) {
 			return trailingslashit( plugins_url( '', AYECODE_UI_PLUGIN_FILE ) );
 		}

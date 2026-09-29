@@ -44,9 +44,7 @@ class Loader {
 		add_filter( 'render_block', array( AssetManager::instance(), 'detect_ayecode_blocks' ), 10, 2 );
 		add_action( 'wp_head', array( AssetManager::instance(), 'enqueue_if_detected' ), 7 );
 
-		// render_block only fires once the loop is rendering, which is after wp_head has
-		// been sent, so the head pass can never see a block. Ask again in the footer, where
-		// WordPress still prints a late-enqueued stylesheet.
+		// render_block fires after wp_head, so the head pass never sees a block. Ask again.
 		add_action( 'wp_footer', array( AssetManager::instance(), 'enqueue_if_detected' ), 7 );
 
 		// WordPress Customizer integration.
